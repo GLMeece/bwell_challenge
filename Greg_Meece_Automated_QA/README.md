@@ -8,36 +8,44 @@ This exercise is intended to demonstrate the mindset of [the candidate](https://
 | ---------- | ----------------- | -------------------------------------- | ------------------------------------------ |
 | Greg Meece | glmeece@gmail.com | https://www.linkedin.com/in/gregmeece/ | https://github.com/GLMeece/bwell_challenge |
 
-## Presuppositions
-
-* The Gherkin syntax is _behavioral_ not _procedural_. IOW, it focuses on what the user would like to accomplish vs. the specific granular steps needed to accomplish a given task.
-* Gherkin's **Given**, **When**, **Then** syntax favors high-level, abstracted implementation.
-* Scenario's [should be stated in the 3rd person](https://automationpanda.com/2017/01/18/should-gherkin-steps-use-first-person-or-third-person/) to avoid confusion of persona roles.
-* Although Scenarios are considered stand-alone, within a given Feature file, Scenarios are executed sequentially. This allows us to reduce the level of Scenario overhead to test sections of functionality which in turn reduces redundancy.
-
-# Automation Setup
+# Automation Setup & Execution
 
 The author has decided to avoid OS and machine-specific compatability issues and utilize container technology - specifically [Docker](https://www.docker.com/resources/what-container).
 ![Jules prefers Docker](https://memegenerator.net/img/instances/81997572/say-works-on-my-machine-one-more-time.jpg)
 
-1. If not done already, [install Docker](https://www.docker.com/get-started) on the SUT.
+1. If not done already, [install Docker](https://www.docker.com/get-started) on the SUT. You will most likely have to restart your machine after installation. Additional installation may be required for Windows (installing or updating the WSL); follow the prompts and you should be OK.
 
-2. In a terminal, change into the repo directory and execute: `docker build -t glmeece/bwell_challenge .`
+2. It is _highly_ recommended you install (or verify the install of) **Make** on the SUT. Both macOS and Linux should already have Make installed, so for Windows:
 
-3. Next, execute: `docker run --name bwell_container -it glmeece/bwell_challenge:latest /bin/bash`
+   1. Go to the [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm) page and click on the _Complete package, except sources_ [Setup](http://gnuwin32.sourceforge.net/downlinks/make.php) link.
+   2. Run the downloaded installer file.
+   3. You will need to [add the path](https://www.computerhope.com/issues/ch000549.htm#windows10) for `make.exe`; `C:\Program Files (x86)\GnuWin32\bin`. After saving changes, when you open a command prompt, you should be able to invoke `make` commands.
+
+3. If you have `make` installed, xxx
+
+4. In a terminal, change into the repo directory and execute: `docker build -t glmeece/bwell_challenge .`
+
+5. Next, execute: `docker run --name bwell_container -it glmeece/bwell_challenge:latest /bin/bash`
    **Note**: If you have executed this step before, you should execute the following command _before_ executing this command again:
 
    ```bash
    docker kill bwell_container || true
    docker rm bwell_container || true
    ```
-   
-4. EXECUTION HERE
 
-5. Once finished, execute `exit` to stop container.
+6. EXECUTION HERE
 
-    
+7. Once finished, execute `exit` to stop container.
 
+     
+
+
+## Presuppositions
+
+* The Gherkin syntax is _behavioral_ not _procedural_. IOW, it focuses on what the user would like to accomplish vs. the specific granular steps needed to accomplish a given task.
+* Gherkin's **Given**, **When**, **Then** syntax favors high-level, abstracted implementation.
+* Scenario's [should be stated in the 3rd person](https://automationpanda.com/2017/01/18/should-gherkin-steps-use-first-person-or-third-person/) to avoid confusion of persona roles.
+* Although Scenarios are considered stand-alone, within a given Feature file, Scenarios are executed sequentially. This allows us to reduce the level of Scenario overhead to test sections of functionality which in turn reduces redundancy.
 
 
 

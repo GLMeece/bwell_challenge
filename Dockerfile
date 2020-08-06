@@ -16,6 +16,3 @@ RUN pip install --upgrade pip
 WORKDIR /opt/bwell
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-
-# remove next line after dev is over...
-RUN apt-get install -y nano
