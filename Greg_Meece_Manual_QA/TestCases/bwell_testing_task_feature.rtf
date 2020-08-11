@@ -1,0 +1,63 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Feature: BWell Testing task\line
+  As a User who is interested in CMS platforms\line
+  I want to create Appointments\line
+  So that I can plan my activities at "http://login.myappcms.com/build"\line
+    \line
+Background:\line
+  Given the user is on the "http://login.myappcms.com/" home page\line
+  And they type "CMS Demo Account" as the App Name\line
+  And they type "demo@diyappdesigner.com" as the Email address\line
+  And they type "demo123" as the Password\line
+  When they click on Sign in button\line
+  Then they should see the CMS Demo Account Dashboard\line
+    \line
+Scenario: User can see Add Service Appointment form\line
+  Given the user is on the CMS Demo Account Dashboard page\line
+  When the user clicks on the Appointments item in the sidebar\line
+  And the user clicks on the Services sub-item below the Appointments item\line
+  And the user clicks on the Add button under the Services tab\line
+  Then the user can see the Services addition form\line
+    \line
+Scenario Outline: User Adds Service Appointment\line
+  Given the user is on the Services addition form\line
+  And the user has clicked the Add button\line
+  When the user enters the value "<value>" in the field "<fieldname>"\line
+  And the user clicks on the Save button\line
+  Then the Service Name, Service Description, Duration, Price and Opening Hours should be evident in the Services list\line
+  \line
+  Examples: Fields\line
+    | fieldname | value |\line
+    | Service Name | With a Smile |\line
+    | Service Description | It's our middle name |\line
+    | Duration | 1:10 |\line
+    | Price | 20.00 |\line
+    | Opening Hours | 08:00 - 17:00 |\line
+    | Image | https://www.freepnglogos.com/uploads/cucumber-png/cucumber-slice-hydrate-photo-pixabay-23.png |\line
+    | Column7 | Collum 7 |\line
+    | Column8 | Call 'em 8 |\line
+    | Sheet1 | Sheets to the wind |\line
+    \line
+Scenario: User can Update Services Appointment entry\line
+  Given the user is on the Services list pane\line
+  When the user clicks the Edit (pencil) icon for the previously-created appointment\line
+  And the user changes the Service Name to "Testing Services"\line
+  And the user clicks on the Save button\line
+  Then the updated Service Name "Testing Services" should be evident in the Services list\line
+    \line
+Scenario: User can Cancel an Update Services Appointment entry\line
+  Given the user is on the Services list pane\line
+  When the user clicks the Edit (pencil) icon for the previously-created appointment\line
+  And the user changes the Service Name from "Testing Services" to "Service Not Saved"\line
+  And the user clicks on the Cancel button\line
+  Then the Service Name "Testing Services" should still be evident in the Services list\line
+    \line
+Scenario: User can Delete Services Appointment entry\line
+  Given the user is on the Services list pane\line
+  When the user clicks the Delete (trashcan) icon for the previously-created appointment "Testing Services"\line
+  And the user clicks Yes in response to "Are you sure you want to remove this item?"\line
+  Then the previously-created Service Name "Testing Services" should be removed from the Services list\par}
+}

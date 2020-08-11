@@ -1,0 +1,55 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Feature: CMS Blog Functionality Tests\line
+  As a QA Tester evaluating the CMS Demo Account\line
+  I want to examine the Blog posts section\line
+  So that I can be assured creation and editing works properly\line
+    \line
+Background:\line
+    Given the user is on the "http://login.myappcms.com/" home page\line
+    And they type "CMS Demo Account" as the App Name\line
+    And they type "demo@diyappdesigner.com" as the Email address\line
+    And they type "demo123" as the Password\line
+    When they click on Sign in button\line
+    Then they should see the CMS Demo Account Dashboard\line
+    \line
+Scenario: User can view Blog creation form\line
+  Given the user is on the CMS Demo Account Dashboard page\line
+  When the user clicks on the Blog item in the sidebar\line
+  And the user clicks on the Add button in the Blog pane\line
+  Then the user can see the Blog addition form\line
+  \line
+Scenario Outline: User Adds New Blog post\line
+  Given the user is on the Blog creation form\line
+  When the user enters the value "<value>" in the field "<fieldname>"\line
+  And the user clicks on the Save button\line
+  Then the Blog Title, Image, Author, and Date should be evident in the Blog list\line
+    \line
+  Examples: Fields\line
+    | fieldname | value |\line
+    | Title | Gherkin without the Pickle |\line
+    | Image | http://messageconsulting.com/wp-content/uploads/2016/04/CucumberLogo.png |\line
+    | Author | Otto Mayter |\line
+    | Date | 01-08-2020 15:00 |\line
+    | Category | [lang_EN]Technology[/lang_EN][lang_PT]Tecnologia[/lang_PT] |\line
+    | Intro | Learning Gherkin is not as hard as you might think! |\line
+    | Content | Read this article for a good start. |\line
+    | URL | https://cucumber.io/docs/gherkin/reference/ |\line
+    | Tags | programming, cucumber, bdd |\line
+\line
+Scenario: User can Update Blog entry\line
+  Given the user is on the Blog list pane\line
+  When the user clicks the Edit (pencil) icon for the previously-created blog entry\line
+  And the user changes the Blog Title to "Cucumber - Not Just Ruby Any More!"\line
+  And the user clicks on the Save button\line
+  Then the updated Blog Title "Cucumber - Not Just Ruby Any More!" should be evident in the Blog list\line
+    \line
+Scenario: User can Cancel an Blog Update\line
+  Given the user is on the Blog list pane\line
+  When the user clicks the Edit (pencil) icon for the previously-created blog entry\line
+  And the user clicks the Draft checkbox\line
+  And the user clicks on the Cancel button\line
+  Then the value of False should be evident in the Blog list for that blog entry\par}
+}
