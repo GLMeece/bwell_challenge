@@ -1,6 +1,6 @@
-# Container's default name (apie2e)
+# Container's default name (bwell_challenge)
 NAME=bwell_challenge
-# Docker image default name (glmeece/apie2e)
+# Docker image default name (glmeece/bwell_challenge)
 IMAGE=glmeece/$(NAME)
 # Base directory
 BASE=/opt/bwell
@@ -44,14 +44,14 @@ dev: stop rm build local
 # Runs tests
 .PHONY: run
 run:
-	@echo "--> Running suite $(SUITE)"
-	suites/${SUITE}.sh || true
+	@echo "--> Running tests..."
+	pytest
 
 # Verify Chrome & Chromedriver are installed correctly and Selenium works
 .PHONY: seltest
 seltest:
 	@echo "--> Testing Selenium, Chromedriver, and Chrome"
-	./test_chromedriver.py
+	./check_chromedriver.py
 
 # Tail container logs
 .PHONY: logs

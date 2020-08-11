@@ -32,7 +32,7 @@ Feature: BWell Testing task
 
 ## Test Scenarios
 
-The following test scenarios are also located in tablular form in the CSV file named X in the same directory as this README. They are shown inline as an easier-to-read format alternative.
+The following test scenarios are also located in the same directory as this README as PDFs and RTFs (the latter also readable, and editable on most platforms. They are shown inline as an easier-to-read format alternative.
 
 ```gherkin
 Feature: BWell Testing task
