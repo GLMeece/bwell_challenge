@@ -10,7 +10,9 @@ This exercise is intended to demonstrate the mindset of [the candidate](https://
 
 # Automation Setup & Execution
 
-The author has decided to avoid OS and machine-specific compatability issues and utilize container technology - specifically [Docker](https://www.docker.com/resources/what-container). This will largely eliminate the need for much setup effort.
+## Container Execution
+
+The author has decided to avoid OS and machine-specific compatability issues and utilize container technology - specifically [Docker](https://www.docker.com/resources/what-container). This will largely eliminate the need for much setup effort. I have verified this setup works on both macOS 10.14 (Mojave) and Windows 10; it _should_ run under most common Linux distros, but I have not verified that. It will almost certainly run in a Python virtual environment under Linux (see next paragraph).
 
 If the user to set up a Python virtual environment and install the package requirements (i.e., `pip install -r requirements.txt`) should you choose to do so. Additionally, you will need to install [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) on the SUT in order to execute the tests. If you desire to see the Chrome browser actually run in this environment (which is not possible within Docker), edit the `Greg_Meece_Automated_QA/step_defs/test_BWell_QA_task.py` file such that the line `chrome_options.add_argument("--headless")` is commented out.
 
@@ -140,3 +142,32 @@ Scenario: User can search all Appointments services by name
 
 ## Closing Thoughts
 
+While the challenge appeared to be relatively straightforward I ran into a few issues along the way and hence am quite tardy in turning in this effort. To wit:
+
+### Learning a New Framework
+
+Although I have used BDD/Gherkin with several other frameworks (the classic [Ruby Cucumber](https://cucumber.io/), [Robot Framework](https://www.testcookbook.com/book/python/robot-framework.html#gherkin), [Protractor](https://semaphoreci.com/community/tutorials/getting-started-with-protractor-and-cucumber), etc.), _and_ I was very comfortable with [PyTest](https://docs.pytest.org/en/latest/), I had never used [PyTest-BDD](https://github.com/pytest-dev/pytest-bdd#bdd-library-for-the-pytest-runner) before. Although the documentation was decent, and I found some [good tutorials](https://automationpanda.com/2018/10/22/python-testing-101-pytest-bdd/), I still kept stumbling over myself trying to get it to work. 
+
+As it turned out, what caused my initial problems (and literally ate up several days worth of effort) was due to some wonky characters embedded in the [BWell_QA_Automation_Task.pdf](Greg_Meece_Automated_QA/BWell_QA_Automation_Task.pdf). I had just copy/pasted the Feature text into _my_ Feature file without the thought of retyping the feature and scenario descriptions. Unfortunately the error messages that PyTest/PyTest-BDD produced didn't seem to point directly at this issue, so I spun my wheels for awhile before I finally figured it out. Once I retyped everything, things finally started coming together.
+
+### (Too Far?) Outside the Box
+
+I ended up modifying that Feature and Scenarios in order to bring them more into conformance to BDD best practices. I'm _hoping_ this may have been part of the challenge - I wasn't trying to get into anyone else's business. I attempted to find a way to work a **Background** step in, but within the confines of the Feature and the time I'd already sunk on other efforts, I went with a more simplistic approach. I had originally planned on testing multiple other areas of the site, including negative test cases, but I finally elected to just "git 'er done".
+
+### Tricksy IDs!
+
+Since almost all elements in the CMS Demo Account have IDs, I initially started off using almost _nothing but_ IDs for my selectors. Except, I found out that a selector that worked just fine a few iterations ago would cease to work. I had to find more generic/clever CSS and XPath selector strategies that would be robust and dependable enough to rely on in order to make the selectors dependable.
+
+### Windows, Always the Problem Child
+
+A trick I learned awhile back to use Docker as a helpful dev environment was to mount the local directory as a drive within the container. For *nix-compatible OS's (macOS, Linux, etc.), using `$(shell pwd)` will emit the current working directory to use as the source of the mounted volume. Windows will use (under the **cmd.exe** terminal) the `%cd%` variable to emit the current working directory _as long as there are no spaces in the path_. I probably wasted 90 minutes trying to find a workaround, but finally gave up. I attempted to get **make** to run under Windows, but it seemed to only halfway work, so I called it quits on that.
+
+### Personal/Family Issues
+
+I had a few other personal issues going on, including:
+
+* My mom, who is in assisted living and is losing her eyesight, had several health and financial issues that took many hours over many days away from my normal schedule.
+* I am interviewing at several other companies (including other coding challenges), so that took some time away as well.
+* We have a son who lives with us who has [ASD](https://www.cdc.gov/ncbddd/autism/facts.html) and he had some challenges come up I had to attend to.
+
+Anyway - for any questions, please feel free to [contact me](mailto:glmeece@gmail.com?subject=bWell%20Challenge).

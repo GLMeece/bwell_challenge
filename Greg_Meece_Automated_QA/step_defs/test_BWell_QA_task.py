@@ -45,7 +45,7 @@ def browser():
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
-    # chrome_options.add_argument("--headless")  # Enable for Docker run
+    chrome_options.add_argument("--headless")  # Enable for Docker run
     crmbrowse = webdriver.Chrome(options=chrome_options)
     crmbrowse.implicitly_wait(wait_for_it)
     crmbrowse.set_page_load_timeout(wait_for_it)
